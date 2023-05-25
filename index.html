@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <h1>Registration form</h1>
+    <form action="" method="get" id="form1" name="form1" onsubmit="return storedata()">
+        <label for="">Username : </label>
+        <input type="text" id="name"> <br><br>
+        <label for="">password : </label>
+        <input type="text" id="pass"> <br><br>
+        <button type="submit">submit</button>
+    </form>
+
+    <table id="table" border="1">
+        <tr id="tableHeader">
+            <th>First name</th>
+            <th>Last name</th>
+        </tr>
+    </table>
+    <script>
+        let loginform = document.getElementById("form1");
+        let arr = []
+        let tableHeader = document.getElementById("tableHeader");
+
+
+
+        loginform.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            let username = document.getElementById("name").value;
+            let password = document.getElementById("pass").value;
+
+
+            const userdata = {
+                fullname: username,
+                pass: password
+            }
+
+            arr.push(userdata);
+            let array = localStorage.setItem("task", JSON.stringify(arr))
+            getLocalStorageData()
+        })
+
+
+        // function getLocalStorageData() {
+        //     const task = JSON.parse(localStorage.getItem("task"))
+
+        //     for (let singleTask of task) {
+        //         tableHeader.insertAdjacentHTML('afterend', `<tr><td>${singleTask.fullname}</td><td>${singleTask.pass}</td></tr>`)
+        //     }
+
+        // }
+
+        function getLocalStorageData() {
+            const task = JSON.parse(localStorage.getItem("task"))
+
+            for (let singleTask of task) {
+                tableHeader.insertAdjacentHTML('afterend', `<tr><td>${singleTask.fullname}</td><td>${singleTask.pass}</td></tr>`)
+            }
+
+        }
+
+
+        getLocalStorageData()
+
+    </script>
+</body>
+
+</html>
